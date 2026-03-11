@@ -1,0 +1,10 @@
+__pycache__/
+*.py[cod]
+.DS_Store
+.env
+.venv/
+venv/
+
+catboost_info/
+database/base_rating.db
+artifacts_base_models/*.cbm

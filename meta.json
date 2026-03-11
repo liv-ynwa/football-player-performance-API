@@ -1,0 +1,218 @@
+{
+  "version": "base_v1",
+  "main_target": "rating_pred",
+  "trained_targets": [
+    "base_rating_pred",
+    "base_attack_score",
+    "base_assist_score",
+    "base_conceded_score",
+    "base_foul_card_score",
+    "base_goalkeeper_score",
+    "base_appearance_score"
+  ],
+  "models": [
+    {
+      "target": "base_rating_pred",
+      "model_path": "artifacts_base_models/base_rating_pred.cbm",
+      "feature_cols": [
+        "age",
+        "league",
+        "season",
+        "position",
+        "minutes_played_overall",
+        "appearances_overall",
+        "goals_involved_per_90_overall",
+        "assists_per_90_overall",
+        "goals_per_90_overall",
+        "conceded_per_90_overall",
+        "cards_per_90_overall",
+        "position_group",
+        "goals_assists_per_90",
+        "yellow_cards_per_90_derived",
+        "red_cards_per_90_derived",
+        "cards_per_90_derived",
+        "clean_sheets_per_90_derived",
+        "nineties",
+        "minutes_per_appearance"
+      ],
+      "cat_cols": [
+        "position",
+        "position_group",
+        "league",
+        "season"
+      ],
+      "metrics": {
+        "rmse_valid": 0.3889158530820808,
+        "std_y_valid": 1.1601751113618668,
+        "rmse_over_std": 0.3352216827212864,
+        "rmse_valid_shuffled_y": 1.5371892521451753
+      },
+      "n_train": 33168,
+      "n_valid": 2175
+    },
+    {
+      "target": "base_attack_score",
+      "model_path": "artifacts_base_models/base_attack_score.cbm",
+      "feature_cols": [
+        "league",
+        "season",
+        "position",
+        "goals_involved_per_90_overall",
+        "goals_per_90_overall",
+        "position_group",
+        "goals_assists_per_90"
+      ],
+      "cat_cols": [
+        "position",
+        "position_group",
+        "league",
+        "season"
+      ],
+      "metrics": {
+        "rmse_valid": 0.7760331018610926,
+        "std_y_valid": 0.9398307079212708,
+        "rmse_over_std": 0.8257158393744468,
+        "rmse_valid_shuffled_y": 1.045282283764278
+      },
+      "n_train": 30727,
+      "n_valid": 2017
+    },
+    {
+      "target": "base_assist_score",
+      "model_path": "artifacts_base_models/base_assist_score.cbm",
+      "feature_cols": [
+        "league",
+        "season",
+        "position",
+        "assists_per_90_overall",
+        "position_group"
+      ],
+      "cat_cols": [
+        "position",
+        "position_group",
+        "league",
+        "season"
+      ],
+      "metrics": {
+        "rmse_valid": 0.6035972962154281,
+        "std_y_valid": 1.0204135322201227,
+        "rmse_over_std": 0.5915222379520744,
+        "rmse_valid_shuffled_y": 1.3577443436589696
+      },
+      "n_train": 30727,
+      "n_valid": 2017
+    },
+    {
+      "target": "base_conceded_score",
+      "model_path": "artifacts_base_models/base_conceded_score.cbm",
+      "feature_cols": [
+        "league",
+        "season",
+        "position",
+        "conceded_per_90_overall",
+        "position_group"
+      ],
+      "cat_cols": [
+        "position",
+        "position_group",
+        "league",
+        "season"
+      ],
+      "metrics": {
+        "rmse_valid": 0.23941540771075304,
+        "std_y_valid": 1.095328068224736,
+        "rmse_over_std": 0.21857872052780314,
+        "rmse_valid_shuffled_y": 1.5198564303729918
+      },
+      "n_train": 33168,
+      "n_valid": 2175
+    },
+    {
+      "target": "base_foul_card_score",
+      "model_path": "artifacts_base_models/base_foul_card_score.cbm",
+      "feature_cols": [
+        "league",
+        "season",
+        "position",
+        "cards_per_90_overall",
+        "position_group",
+        "yellow_cards_per_90_derived",
+        "red_cards_per_90_derived",
+        "cards_per_90_derived"
+      ],
+      "cat_cols": [
+        "position",
+        "position_group",
+        "league",
+        "season"
+      ],
+      "metrics": {
+        "rmse_valid": 0.5337716261941697,
+        "std_y_valid": 0.9732584126560058,
+        "rmse_over_std": 0.548437721424381,
+        "rmse_valid_shuffled_y": 1.245708548892273
+      },
+      "n_train": 33168,
+      "n_valid": 2175
+    },
+    {
+      "target": "base_goalkeeper_score",
+      "model_path": "artifacts_base_models/base_goalkeeper_score.cbm",
+      "feature_cols": [
+        "league",
+        "season",
+        "position",
+        "position_group",
+        "clean_sheets_per_90_derived"
+      ],
+      "cat_cols": [
+        "position",
+        "position_group",
+        "league",
+        "season"
+      ],
+      "metrics": {
+        "rmse_valid": 0.36077237905474685,
+        "std_y_valid": 1.2025173555109694,
+        "rmse_over_std": 0.3000142803772248,
+        "rmse_valid_shuffled_y": 1.4378339848270836
+      },
+      "n_train": 2441,
+      "n_valid": 158
+    },
+    {
+      "target": "base_appearance_score",
+      "model_path": "artifacts_base_models/base_appearance_score.cbm",
+      "feature_cols": [
+        "age",
+        "league",
+        "season",
+        "position",
+        "minutes_played_overall",
+        "appearances_overall",
+        "position_group",
+        "nineties",
+        "minutes_per_appearance"
+      ],
+      "cat_cols": [
+        "position",
+        "position_group",
+        "league",
+        "season"
+      ],
+      "metrics": {
+        "rmse_valid": 0.2489113842596088,
+        "std_y_valid": 0.49598538221834737,
+        "rmse_over_std": 0.5018522585208584,
+        "rmse_valid_shuffled_y": 0.6880218264846244
+      },
+      "n_train": 33168,
+      "n_valid": 2175
+    }
+  ],
+  "notes": {
+    "teacher_system": "target.py (components->PCA->shrink->group_zscore)",
+    "artifact_policy": "meta.json is public. .cbm model artifacts are intentionally not committed to this repository.",
+    "pro_access": "Use the hosted API or Futrix Metrics Platform for Pro model access."
+  }
+}
