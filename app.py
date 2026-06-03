@@ -7,9 +7,12 @@ import sqlite3
 from typing import Any
 
 from fastapi import FastAPI, HTTPException, Query
+from fastapi.staticfiles import StaticFiles
+from fastapi.middleware.cors import CORSMiddleware
 
 from score_building import BASE_WEIGHTS_BY_POS, build_scored_dataset
 from base.features import load_base_dataframe
+from style_matching.router import router as style_matching_router
 
 
 PROJECT_ROOT = Path(__file__).resolve().parent
@@ -18,6 +21,17 @@ BASE_TABLE = os.getenv("BASE_TABLE", "player_features_base")
 SCORES_DB_PATH = Path(os.getenv("SCORES_DB_PATH", PROJECT_ROOT / "database" / "base_rating.db"))
 SCORES_TABLE = os.getenv("SCORES_TABLE", "base_scores")
 META_PATH = Path(os.getenv("META_PATH", PROJECT_ROOT / "meta.json"))
+DEMO_DIR = PROJECT_ROOT / "frontend" / "demo" / "dist"
+STYLE_ALLOWED_ORIGINS = [
+    origin.strip()
+    for origin in os.getenv(
+        "STYLE_ALLOWED_ORIGINS",
+        "http://localhost:3000,http://127.0.0.1:3000,"
+        "http://localhost:5173,http://127.0.0.1:5173,"
+        "http://localhost:5500,http://127.0.0.1:5500",
+    ).split(",")
+    if origin.strip()
+]
 
 DEFAULT_ORDER_COL = "rating_display_score_pct"
 PLAYER_COLUMNS = [
@@ -54,6 +68,18 @@ app = FastAPI(
         "The Pro model is available via the hosted API and Futrix Metrics Platform."
     ),
 )
+
+app.add_middleware(
+    CORSMiddleware,
+    allow_origins=STYLE_ALLOWED_ORIGINS,
+    allow_credentials=False,
+    allow_methods=["GET"],
+    allow_headers=["*"],
+)
+
+app.include_router(style_matching_router)
+if DEMO_DIR.exists():
+    app.mount("/demo", StaticFiles(directory=DEMO_DIR, html=True), name="demo")
 
 
 def _get_connection(db_path: Path) -> sqlite3.Connection:
@@ -113,6 +139,8 @@ def root() -> dict[str, Any]:
         "health": "/health",
         "metadata": "/metadata",
         "players": "/players",
+        "style_matching": "/style/metadata",
+        "demo": "/demo",
         "pro_api_docs": "https://footballperformanceapi.site/redoc",
         "pro_platform": "https://www.futrixmetrics.com/platform",
         "custom_solution": "https://www.futrixmetrics.com/customize.html",

@@ -81,6 +81,34 @@ python model/base_model.py
 
 Generated model metadata is also published at `meta.json`.
 
+
+## Style matching API
+
+This repository also includes a style-matching module for player-to-team and team-to-player fit analysis.
+
+Style-matching databases are not committed because they can contain third-party/vendor-derived data. Provide private database paths through environment variables on your server:
+
+```bash
+STYLE_MATCHING_DB_PATH=/srv/futrixmetrics/style_matching/team_player_match_results.db
+STYLE_MODEL_QUALITY_PATH=/srv/futrixmetrics/style_matching/model_quality.json
+STYLE_PLAYER_STYLE_DB_PATH=/srv/futrixmetrics/style_matching/player_style_results.db
+STYLE_TEAM_STYLE_DB_PATH=/srv/futrixmetrics/style_matching/team_style_results.db
+```
+
+Useful endpoints:
+
+- `GET /style/health`
+- `GET /style/metadata`
+- `GET /style/players/search?q=Messi&limit=5`
+- `GET /style/teams/search?q=Basel&limit=5`
+- `GET /style/players/{player_id}/team-matches`
+- `GET /style/teams/{team_row_id}/player-matches`
+- `GET /style/current-club-audit`
+
+The frontend demo is served at `GET /demo` when the API is running.
+
+See `docs/style-matching.md` for the full setup notes.
+
 ## Notes
 
 - This repository is focused on the open-source base model only.

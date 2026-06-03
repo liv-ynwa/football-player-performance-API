@@ -5,6 +5,17 @@ __pycache__/
 .venv/
 venv/
 
+frontend/demo/node_modules/
+frontend/demo/tsconfig.app.tsbuildinfo
+frontend/demo/dist/.vite/
+
 catboost_info/
 database/base_rating.db
 artifacts_base_models/*.cbm
+
+# Keep all style-matching datasets private. Do not commit vendor-derived data.
+database/style_matching/**/*.db
+database/style_matching/**/*.json
+database/style_matching/*.db
+database/style_matching/*.json
+database/style_matching/full/
